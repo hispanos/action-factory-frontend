@@ -33,6 +33,25 @@
           "default": true,
           "crudKey": "id",
           "callbacks": []
+        },
+        {
+          "uuid": "d5d8bda2-8044-471e-83e2-07a3f57de15b",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
       "responseMode": null
