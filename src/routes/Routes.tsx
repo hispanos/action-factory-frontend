@@ -5,6 +5,7 @@ import PrivatedRoutes from './PrivatedRoutes';
 import Suppliers from '../pages/Suppliers';
 import { createContext, useEffect, useState } from 'react';
 import { User } from '../interfaces/User';
+import Dashboard from '../templates/Dashboard';
 
 export type UserContextType = {
   user: User | undefined;
@@ -27,8 +28,14 @@ const router = createBrowserRouter([
     path: '/',
     element: <PrivatedRoutes />,
     children: [
-      { path: '/', element: <Home /> },
-      { path: '/suppliers', element: <Suppliers /> },
+      {
+        path: '/',
+        element: <Dashboard />,
+        children: [
+          { path: '/', element: <Home /> },
+          { path: '/suppliers', element: <Suppliers /> },
+        ],
+      },
     ],
   },
   {
@@ -46,7 +53,7 @@ const Routes = () => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsLogged(true);
-    }else {
+    } else {
       setIsLogged(false);
     }
     setLoadingLogin(false);
