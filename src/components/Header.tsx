@@ -8,12 +8,14 @@ import {
   styled,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { useState } from 'react';
-import { mainListItems } from './Menu';
+import { useContext, useState } from 'react';
+import MainListItems from './Menu';
 import MuiDrawer from '@mui/material/Drawer';
+import { AppContext } from '../routes/Routes';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth: number = 240;
 
@@ -67,9 +69,17 @@ const AppBar = styled(MuiAppBar, {
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const { setIsLogged, setUser } = useContext(AppContext);
+  const navigate = useNavigate();
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const handleLogout = () => {
+    setIsLogged(false);
+    setUser(undefined);
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
   return (
     <>
       <AppBar position="absolute" open={open}>
@@ -99,9 +109,9 @@ const Header = () => {
           >
             Action Factory
           </Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={handleLogout}>
             <Badge badgeContent={0} color="secondary">
-              <NotificationsIcon />
+              <PowerSettingsNewIcon />
             </Badge>
           </IconButton>
         </Toolbar>
@@ -121,7 +131,7 @@ const Header = () => {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
+          <MainListItems />
         </List>
       </Drawer>
     </>

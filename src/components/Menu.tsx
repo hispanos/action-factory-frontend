@@ -4,26 +4,40 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export const mainListItems = (
-  <React.Fragment>
-    <Link to="/">
-      <ListItemButton>
+const MainListItems = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+  };
+
+  return (
+    <React.Fragment>
+      <ListItemButton
+        onClick={() => {
+          handleNavigate('/');
+        }}
+      >
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Validación" />
       </ListItemButton>
-    </Link>
 
-    <Link to="/suppliers">
-      <ListItemButton>
+      <ListItemButton
+        onClick={() => {
+          handleNavigate('/suppliers');
+        }}
+      >
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Proveedores" />
       </ListItemButton>
-    </Link>
-  </React.Fragment>
-);
+    </React.Fragment>
+  );
+};
+
+export default MainListItems;
