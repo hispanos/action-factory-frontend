@@ -30,7 +30,7 @@ const TableComponent = <T,>({
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map((row, index) => (
+        {rows.map((_row, index) => (
           <TableRow key={index}>
             <TableCell>{index}</TableCell>
           </TableRow>
