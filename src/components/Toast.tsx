@@ -11,14 +11,7 @@ const Toast = ({
   type: 'success' | 'error' | 'warning' | 'info';
   message: string;
 }) => {
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
+  const handleClose = () => {
     setOpen(false);
   };
   return (
