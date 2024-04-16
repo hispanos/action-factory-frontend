@@ -38,7 +38,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         },
@@ -47,6 +47,122 @@
           "body": "{}",
           "latency": 0,
           "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "7a771020-4c68-4a5f-8fa0-2c6054e1a132",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "supplier",
+      "responses": [
+        {
+          "uuid": "e35f0f0d-f922-4a70-bef4-ca61a3c6e880",
+          "body": "{\n  \"data\": [\n  {\n    \"id\": 1,\n    \"name\": \"Proveedor 1\",\n    \"address\": \"Calle 123\",\n    \"telephoneNumber\": \"123456789\",\n    \"email\": \"uncorreo@example.com\",\n    \"webSite\": \"www.example.com\",\n    \"sectorIndustry\": \"Industria 1\",\n    \"registrationDate\": \"2021-10-10\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Proveedor 2\",\n    \"address\": \"Calle 123\",\n    \"telephoneNumber\": \"123456789\",\n    \"email\": \"uncorreo@example.com\",\n    \"webSite\": \"www.example.com\",\n    \"sectorIndustry\": \"Industria 1\",\n    \"registrationDate\": \"2021-10-10\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Proveedor 2\",\n    \"address\": \"Calle 123\",\n    \"telephoneNumber\": \"123456789\",\n    \"email\": \"uncorreo@example.com\",\n    \"webSite\": \"www.example.com\",\n    \"sectorIndustry\": \"Industria 1\",\n    \"registrationDate\": \"2021-10-10\"\n  }\n]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "270417e7-f329-44bb-b82c-a1300d7799ad",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "supplier",
+      "responses": [
+        {
+          "uuid": "8748d748-c7ea-44f1-956b-0a1590ecd22e",
+          "body": "{\n  \"data\": \n  {\n    \"id\": 1,\n    \"name\": \"Proveedor 1\",\n    \"address\": \"Calle 123\",\n    \"telephoneNumber\": \"123456789\",\n    \"email\": \"uncorreo@example.com\",\n    \"webSite\": \"www.example.com\",\n    \"sectorIndustry\": \"Industria 1\",\n    \"registrationDate\": \"2021-10-10\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b5e781f4-d7f4-41cb-aab2-ee2e46adafac",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "supplier/:id",
+      "responses": [
+        {
+          "uuid": "204ef317-7993-483f-b5e7-62b0144d755d",
+          "body": "{\n  \"data\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "29168f8d-c19f-4a7d-9348-9cd1b43367c7",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "supplier/:id",
+      "responses": [
+        {
+          "uuid": "1c149609-3b1f-4029-9454-71ecdf79138e",
+          "body": "{\n  \"data\": \n  {\n    \"id\": 1,\n    \"name\": \"Proveedor 1\",\n    \"address\": \"Calle 123\",\n    \"telephoneNumber\": \"123456789\",\n    \"email\": \"uncorreo@example.com\",\n    \"webSite\": \"www.example.com\",\n    \"sectorIndustry\": \"Industria 1\",\n    \"registrationDate\": \"2021-10-10\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
           "label": "",
           "headers": [],
           "bodyType": "INLINE",
@@ -69,6 +185,22 @@
     {
       "type": "route",
       "uuid": "86d3d503-c46b-4e27-8c08-3157c1a96fbc"
+    },
+    {
+      "type": "route",
+      "uuid": "7a771020-4c68-4a5f-8fa0-2c6054e1a132"
+    },
+    {
+      "type": "route",
+      "uuid": "270417e7-f329-44bb-b82c-a1300d7799ad"
+    },
+    {
+      "type": "route",
+      "uuid": "b5e781f4-d7f4-41cb-aab2-ee2e46adafac"
+    },
+    {
+      "type": "route",
+      "uuid": "29168f8d-c19f-4a7d-9348-9cd1b43367c7"
     }
   ],
   "proxyMode": false,

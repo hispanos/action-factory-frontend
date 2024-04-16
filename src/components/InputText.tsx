@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 
-type TypeInput = 'text' | 'password' | 'email' | 'number';
+type TypeInput = 'text' | 'password' | 'email' | 'number' | 'date';
 
 const InputText = ({
   type,

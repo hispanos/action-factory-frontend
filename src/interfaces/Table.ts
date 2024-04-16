@@ -1,11 +1,11 @@
-export type Columns = Column[];
-export type Column = {
+export type Columns<T> = Column<T>[];
+export type Column<T> = {
   id: string;
   label: string;
   name: string;
   minWidth?: number;
   align?: 'right' | 'left' | 'center';
-  format?: (value: number) => string;
+  format?: (element: T) => JSX.Element;
 };
 
 export type Rows<R extends RowType> = R[];
