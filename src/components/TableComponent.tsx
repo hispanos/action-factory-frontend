@@ -12,7 +12,7 @@ const TableComponent = <T extends RowType>({
   columns,
   rows,
 }: {
-  columns: Columns;
+  columns: Columns<T>;
   rows: Rows<T>;
 }) => {
   return (
@@ -34,9 +34,16 @@ const TableComponent = <T extends RowType>({
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={index}>
-              {columns.map((column, index2) => (
-                <TableCell key={index2}>{row[column.name]}</TableCell>
-              ))}
+              {columns.map((column, index2) => {
+                if (column.format) {
+                  return (
+                    <TableCell key={index2}>
+                      {column.format(row)}
+                    </TableCell>
+                  );
+                }
+                return <TableCell key={index2}>{row[column.name]}</TableCell>;
+              })}
             </TableRow>
           ))}
         </TableBody>
