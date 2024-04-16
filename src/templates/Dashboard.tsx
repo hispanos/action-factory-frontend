@@ -8,12 +8,15 @@ import {
 } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
+import Toast from '../components/Toast';
 
 const defaultTheme = createTheme();
 
 const Dashboard = () => {
+
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Toast/>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Header />

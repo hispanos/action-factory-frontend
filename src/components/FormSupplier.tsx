@@ -1,20 +1,19 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import InputText from './InputText';
 import type { FormSupplier, Supplier } from '../interfaces/Supplier';
 import { saveSuppliers, updateSupplier } from '../services/supplier';
+import { AppContext } from '../routes/Routes';
 
 const FormSupplier = ({
   doRefresh,
   isEdit,
   supplier,
-  setAlert,
 }: {
   doRefresh: () => void;
   isEdit: boolean;
   supplier: Supplier | undefined;
-  setAlert: (alert: { open: boolean; message: string; type: string }) => void;
 }) => {
   const {
     control,
@@ -22,6 +21,8 @@ const FormSupplier = ({
     formState: { errors },
     setValue,
   } = useForm<FormSupplier>();
+
+  const { setAlert } = useContext(AppContext);
 
   useEffect(() => {
     if (isEdit && supplier) {

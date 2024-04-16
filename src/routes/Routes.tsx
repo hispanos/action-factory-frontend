@@ -6,6 +6,7 @@ import Suppliers from '../pages/Suppliers';
 import { createContext, useEffect, useState } from 'react';
 import { User } from '../interfaces/User';
 import Dashboard from '../templates/Dashboard';
+import { AlertType } from '../interfaces/Alert';
 
 export type UserContextType = {
   user: User | undefined;
@@ -13,6 +14,8 @@ export type UserContextType = {
   isLogged: boolean;
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
   loadingLogin: boolean;
+  alert: AlertType;
+  setAlert: React.Dispatch<React.SetStateAction<AlertType>>;
 };
 
 export const AppContext = createContext<UserContextType>({
@@ -21,6 +24,12 @@ export const AppContext = createContext<UserContextType>({
   isLogged: false,
   user: undefined,
   loadingLogin: false,
+  alert: {
+    open: false,
+    message: '',
+    type: 'success',
+  },
+  setAlert: () => {},
 });
 
 const router = createBrowserRouter([
@@ -48,6 +57,11 @@ const Routes = () => {
   const [user, setUser] = useState<User>();
   const [isLogged, setIsLogged] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(true);
+  const [alert, setAlert] = useState<AlertType>({
+    open: false,
+    message: '',
+    type: 'success',
+  });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -67,6 +81,8 @@ const Routes = () => {
         isLogged,
         setIsLogged,
         loadingLogin,
+        alert,
+        setAlert,
       }}
     >
       <RouterProvider router={router} />
