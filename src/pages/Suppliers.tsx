@@ -2,14 +2,14 @@ import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import TableComponent from '../components/TableComponent';
 import { Columns } from '../interfaces/Table';
 import { Supplier } from '../interfaces/Supplier';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { deleteSupplier, getSuppliers } from '../services/supplier';
 import ModalComponent from '../components/ModalComponent';
 import FormSupplier from '../components/FormSupplier';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import AlertDialog from '../components/AlertDialog';
-import Toast from '../components/Toast';
+import { AppContext } from '../routes/Routes';
 
 const Suppliers = () => {
   const columnsSupplier: Columns<Supplier> = [
@@ -65,11 +65,8 @@ const Suppliers = () => {
   const [openAlert, setOpenAlert] = useState<boolean>(false);
   const [currentSupplier, setCurrentSupplier] = useState<Supplier>();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [alert, setAlert] = useState({
-    open: false,
-    message: '',
-    type: '',
-  });
+
+  const { setAlert } = useContext(AppContext);
 
   useEffect(() => {
     getData();
@@ -127,13 +124,6 @@ const Suppliers = () => {
     }
   };
 
-  const handleOpenAlert = (status: boolean) => {
-    setAlert({
-      ...alert,
-      open: status,
-    });
-  };
-
   return (
     <>
       {openModal && (
@@ -142,7 +132,6 @@ const Suppliers = () => {
             doRefresh={doRefresh}
             isEdit={isEdit}
             supplier={currentSupplier}
-            setAlert={setAlert}
           />
         </ModalComponent>
       )}
@@ -155,12 +144,6 @@ const Suppliers = () => {
           handleClick={handleDelete}
         />
       )}
-      <Toast
-        open={alert.open}
-        setOpen={handleOpenAlert}
-        type={alert.type as 'success' | 'error' | 'warning' | 'info'}
-        message={alert.message}
-      />
 
       <Grid container spacing={3}>
         <Grid item xs={12}>

@@ -1,5 +1,11 @@
 import { TextField } from '@mui/material';
-import { Control, Controller, FieldValues } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  FieldValues,
+  RegisterOptions,
+} from 'react-hook-form';
 
 type TypeInput = 'text' | 'password' | 'email' | 'number' | 'date';
 
@@ -10,19 +16,29 @@ const InputText = ({
   label = name,
   required = false,
   errors,
+  rules,
 }: {
   type: TypeInput;
   name: string;
   control: unknown;
   label?: string;
   required?: boolean;
-  errors: unknown;
+  errors: FieldErrors<FieldValues>;
+  rules?: unknown;
 }) => {
   return (
     <Controller
       name={name}
       control={control as Control<FieldValues>}
-      rules={{ required }}
+      rules={{
+        ...(rules as
+          | Omit<
+              RegisterOptions<FieldValues, string>,
+              'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+            >
+          | undefined),
+        required,
+      }}
       render={({ field }) => (
         <TextField
           {...field}
@@ -35,7 +51,9 @@ const InputText = ({
           type={type}
           helperText={
             errors && errors[name as keyof typeof errors]
-              ? `El campo ${label} es requerido`
+              ? errors[name as keyof typeof errors]?.message
+                ? `${errors[name as keyof typeof errors]?.message}`
+                : `El campo ${label} es requerido`
               : ''
           }
         />

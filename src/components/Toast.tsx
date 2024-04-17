@@ -1,18 +1,15 @@
 import { Alert, Snackbar } from '@mui/material';
+import { useContext } from 'react';
+import { AppContext } from '../routes/Routes';
 
-const Toast = ({
-  open,
-  setOpen,
-  type,
-  message,
-}: {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  type: 'success' | 'error' | 'warning' | 'info';
-  message: string;
-}) => {
+const Toast = () => {
+  const {
+    setAlert,
+    alert: { message, open, type },
+  } = useContext(AppContext);
+
   const handleClose = () => {
-    setOpen(false);
+    setAlert((prev) => ({ ...prev, open: false }));
   };
   return (
     <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>

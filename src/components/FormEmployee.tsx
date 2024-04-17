@@ -1,76 +1,85 @@
-import { Box, Button, Typography } from '@mui/material';
-import { useContext, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import InputText from './InputText';
-import type { FormSupplier, Supplier } from '../interfaces/Supplier';
-import { saveSuppliers, updateSupplier } from '../services/supplier';
+import type { Employee, FormEmployee } from '../interfaces/Employee';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../routes/Routes';
+import { saveEmployees, updateEmployee } from '../services/employee';
+import { Box, Button, Typography } from '@mui/material';
+import InputText from './InputText';
+import InputSelect from './InputSelect';
 import { regexEmail } from '../utils/regex';
 
-const FormSupplier = ({
+const FormEmployeeSave = ({
   doRefresh,
   isEdit,
-  supplier,
+  employee,
 }: {
   doRefresh: () => void;
   isEdit: boolean;
-  supplier: Supplier | undefined;
+  employee: Employee | undefined;
 }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<FormSupplier>();
+  } = useForm<FormEmployee>();
 
   const { setAlert } = useContext(AppContext);
 
-  useEffect(() => {
-    if (isEdit && supplier) {
-      setValue('name', supplier.name);
-      setValue('address', supplier.address);
-      setValue('telephoneNumber', supplier.telephoneNumber);
-      setValue('email', supplier.email);
-      setValue('webSite', supplier.webSite);
-      setValue('sectorIndustry', supplier.sectorIndustry);
-      setValue('registrationDate', supplier.registrationDate);
-    }
-  }, [isEdit, supplier]);
+  const optionsState = [
+    { value: 'ACTIVO', label: 'Activo' },
+    { value: 'INACTIVO', label: 'Inactivo' },
+  ];
 
-  const onSubmit: SubmitHandler<FormSupplier> = async (data) => {
+  const optionsRole = [
+    { value: '1', label: 'Coordinador' },
+    { value: '2', label: 'Validador' },
+  ];
+
+  useEffect(() => {
+    if (isEdit && employee) {
+      setValue('name', employee.name);
+      setValue('email', employee.email);
+      setValue('role', employee.role.id as unknown as string);
+      setValue('hiringDate', employee.hiringDate);
+      setValue('state', employee.state);
+    }
+  }, [isEdit, employee]);
+
+  const onSubmit: SubmitHandler<FormEmployee> = async (data) => {
     try {
-      if (isEdit && supplier) {
-        // Edit supplier
-        const response = await updateSupplier(supplier.id, data);
+      if (isEdit && employee) {
+        // Edit employee
+        const response = await updateEmployee(Number(employee.id), data);
         if (response?.data) {
           setAlert({
             open: true,
-            message: 'Proveedor editado con éxito.',
+            message: 'Empleado editado con éxito.',
             type: 'success',
           });
           doRefresh();
         } else {
           setAlert({
             open: true,
-            message: 'Hubo un problema al editar el proveedor.',
+            message: 'Hubo un problema al editar el empleado.',
             type: 'error',
           });
         }
         return;
       } else {
-        // Save supplier
-        const response = await saveSuppliers(data);
+        // Save employee
+        const response = await saveEmployees(data);
         if (response?.data) {
           setAlert({
             open: true,
-            message: 'Proveedor guardado con éxito.',
+            message: 'Empleado guardado con éxito.',
             type: 'success',
           });
           doRefresh();
         } else {
           setAlert({
             open: true,
-            message: 'Hubo un problema al guardar el proveedor.',
+            message: 'Hubo un problema al guardar el empleado.',
             type: 'error',
           });
         }
@@ -78,15 +87,16 @@ const FormSupplier = ({
     } catch (error) {
       setAlert({
         open: true,
-        message: 'Hubo un problema al guardar el proveedor.',
+        message: 'Hubo un problema al guardar el empleado.',
         type: 'error',
       });
     }
   };
+
   return (
     <Box sx={{ p: 1 }}>
       <Typography variant="h6" gutterBottom>
-        Nuevo Proveedor
+        Nuevo Empleado
       </Typography>
       <Box
         component="form"
@@ -99,22 +109,6 @@ const FormSupplier = ({
           name="name"
           control={control}
           label="Nombre"
-          required
-          errors={errors}
-        />
-        <InputText
-          type="text"
-          name="address"
-          control={control}
-          label="Dirección"
-          required
-          errors={errors}
-        />
-        <InputText
-          type="text"
-          name="telephoneNumber"
-          control={control}
-          label="Teléfono"
           required
           errors={errors}
         />
@@ -132,29 +126,29 @@ const FormSupplier = ({
             },
           }}
         />
-        <InputText
-          type="text"
-          name="webSite"
+        <InputSelect
+          name="role"
           control={control}
-          label="Sitio Web"
+          label="Rol"
           required
           errors={errors}
-        />
-        <InputText
-          type="text"
-          name="sectorIndustry"
-          control={control}
-          label="Industria"
-          required
-          errors={errors}
+          options={optionsRole}
         />
         <InputText
           type="date"
-          name="registrationDate"
+          name="hiringDate"
           control={control}
-          label="Fecha de Registro"
+          label="Fecha de contratación"
           required
           errors={errors}
+        />
+        <InputSelect
+          name="state"
+          control={control}
+          label="Estado"
+          required
+          errors={errors}
+          options={optionsState}
         />
         <Button
           type="submit"
@@ -170,4 +164,4 @@ const FormSupplier = ({
   );
 };
 
-export default FormSupplier;
+export default FormEmployeeSave;

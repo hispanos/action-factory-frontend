@@ -5,6 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import { useNavigate } from 'react-router-dom';
+import { LocalShipping } from '@mui/icons-material';
 
 const MainListItems = () => {
   const navigate = useNavigate();
@@ -13,29 +14,37 @@ const MainListItems = () => {
     navigate(path);
   };
 
+  const menuElements = [
+    {
+      path: '/',
+      label: 'Validación',
+      icon: <DashboardIcon />,
+    },
+    {
+      path: '/suppliers',
+      label: 'Proveedores',
+      icon: <LocalShipping />,
+    },
+    {
+      path: '/employees',
+      label: 'Empleados',
+      icon: <PeopleIcon />,
+    },
+  ];
+
   return (
     <React.Fragment>
-      <ListItemButton
-        onClick={() => {
-          handleNavigate('/');
-        }}
-      >
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Validación" />
-      </ListItemButton>
-
-      <ListItemButton
-        onClick={() => {
-          handleNavigate('/suppliers');
-        }}
-      >
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Proveedores" />
-      </ListItemButton>
+      {menuElements.map((element) => (
+        <ListItemButton
+          key={element.path}
+          onClick={() => {
+            handleNavigate(element.path);
+          }}
+        >
+          <ListItemIcon>{element.icon}</ListItemIcon>
+          <ListItemText primary={element.label} />
+        </ListItemButton>
+      ))}
     </React.Fragment>
   );
 };
