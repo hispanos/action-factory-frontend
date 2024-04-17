@@ -7,6 +7,7 @@ import { createContext, useEffect, useState } from 'react';
 import { User } from '../interfaces/User';
 import Dashboard from '../templates/Dashboard';
 import { AlertType } from '../interfaces/Alert';
+import Employees from '../pages/Employees';
 
 export type UserContextType = {
   user: User | undefined;
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
         children: [
           { path: '/', element: <Home /> },
           { path: '/suppliers', element: <Suppliers /> },
+          { path: '/employees', element: <Employees /> },
         ],
       },
     ],
