@@ -1,23 +1,10 @@
-import {
-  Alert,
-  Avatar,
-  Box,
-  Button,
-  Container,
-  CssBaseline,
-  ThemeProvider,
-  Typography,
-  createTheme,
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import InputText from '../components/InputText';
 import { login } from '../services/authentication';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../routes/Routes';
 import { useNavigate } from 'react-router-dom';
-
-const defaultTheme = createTheme();
+import '../assets/login.css';
+import { Alert } from '@mui/material';
 
 type Inputs = {
   email: string;
@@ -26,7 +13,7 @@ type Inputs = {
 
 const Login = () => {
   const {
-    control,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -34,6 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setIsLogged, setUser, isLogged } = useContext(AppContext);
   const [errorLogin, setErrorLogin] = useState(false);
+  const secondTextRef = useRef<HTMLInputElement>(null);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setErrorLogin(false);
@@ -48,74 +36,88 @@ const Login = () => {
     }
   };
 
+  const textLoad = () => {
+    setTimeout(() => {
+      if (secondTextRef.current) {
+        secondTextRef.current.textContent = 'Validación Simplificada';
+      }
+    }, 0);
+    setTimeout(() => {
+      if (secondTextRef.current) {
+        secondTextRef.current.textContent = 'Hacemos el Trabajo Pesado';
+      }
+    }, 4000);
+    setTimeout(() => {
+      if (secondTextRef.current) {
+        secondTextRef.current.textContent = 'Tu Socio Confiable :)';
+      }
+    }, 8000);
+  };
+
   useEffect(() => {
     if (isLogged) {
       navigate('/');
     }
   }, [isLogged]);
 
+  useEffect(() => {
+    textLoad();
+    setInterval(textLoad, 12000);
+  }, []);
+
   return (
-    <>
-      <ThemeProvider theme={defaultTheme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h3">
-              Action Factory
-            </Typography>
-            <Typography component="h1" variant="h5">
-              Iniciar Sesión
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit(onSubmit)}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <InputText
-                type="text"
-                name="email"
-                control={control}
-                label="Correo electrónico"
-                required
-                errors={errors}
-              />
-              <InputText
-                type="password"
-                name="password"
-                control={control}
-                label="Contraseña"
-                required
-                errors={errors}
-              />
-              {errorLogin && (
-                <Alert severity="error">
-                  Usuario o contraseña incorrectos.
-                </Alert>
-              )}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Ingresar
-              </Button>
-            </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
-    </>
+    <div className="heroki">
+      <div className="box-1">
+        <div className="conteiner">
+          <h1 className="title">Action Factory</h1>
+          <h3 className="text second-text" ref={secondTextRef}>
+            Validación de dispositivos
+          </h3>
+        </div>
+      </div>
+      <div className="box-2">
+        <div className="hero">
+          <div className="main">
+            <input type="checkbox" id="chk" aria-hidden="true" />
+            <div className="login">
+              <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                {errorLogin && (
+                  <Alert severity="error" className='form__alert'>
+                    Usuario o contraseña incorrectos.
+                  </Alert>
+                )}
+                <label htmlFor="chk" aria-hidden="true">
+                  Ingresar
+                </label>
+                <input
+                  className={`input ${errors.email ? 'border__error' : ''}`}
+                  type="email"
+                  placeholder="Correo electrónico"
+                  {...register('email', { required: true })}
+                />
+                {errors.email && (
+                  <span className="input__error">
+                    Este campo es obligatorio
+                  </span>
+                )}
+                <input
+                  className={`input ${errors.password ? 'border__error' : ''}`}
+                  type="password"
+                  placeholder="Contraseña"
+                  {...register('password', { required: true })}
+                />
+                {errors.password && (
+                  <span className="input__error">
+                    Este campo es obligatorio
+                  </span>
+                )}
+                <button>Log in</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,0 +1,289 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    aling-items: center;
+    font-family: roboto;
+    background-color: #1976D2;
+    overflow: hidden;
+  }
+  
+  .second-text{
+    font-size: 2rem;
+    color: #AFD3FF;
+    margin-top: -35px;
+  }
+  
+  .title{
+    font-size: 4rem;
+    margin-top: 400px;
+    color: white;
+  }
+  
+  .heroki {
+    display: flex;
+    height: 100vh; 
+    width: 1200px;
+    background-color: red;
+  }
+  
+  .hero{
+    width:300px;
+    height:500px;
+    justify-content: center;
+    aling-items: center;
+    margin-top: 200px;
+  } 
+  
+  .box-1{
+    flex: 1;
+    background-color:green;
+    display:flex;
+    justify-content: center;
+    aling-items: center;
+    background-color: #1976D2;
+    height: 100%;
+  }
+  .box-2{
+    flex: 1;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    aling-items: center;
+    height: 100%;
+    position: relative;
+  }
+  
+  form input{
+    background-color: black;
+  }
+  
+  .main {
+    position: relative;
+    flex-direction: column;
+    background-color: #1976D2;
+    max-height: 555px;
+    width: 350px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 7px 7px 10px 3px #24004628;
+    margin-left: -24px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px;
+  }
+
+  .form__alert {
+    margin-bottom: -60px;
+  }
+  
+  #chk {
+    display: none;
+  }
+  
+  .login {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .login label {
+    margin: 25% 0 5%;
+  }
+  
+  label {
+    color: #fff;
+    font-size: 2rem;
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+  }
+  
+  .input {
+    width: 87%;
+    height: 40px;
+    background: #DAEAFE;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    margin: 10px;
+    font-size: 1rem;
+  }
+
+  .border__error {
+    border: 3px solid rgb(156, 65, 65);
+  }
+
+  .input__error{
+    color: rgb(156, 65, 65);
+    font-size: 1rem;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    margin-left: 8px;
+  }
+  
+  .register {
+    background: #eee;
+    border-radius: 60% / 10%;
+    transform: translateY(5%);
+    transition: .8s ease-in-out;
+  }
+  
+  .register label {
+    color: #1976D2;
+    transform: scale(.6);
+  }
+  
+  #chk:checked ~ .register {
+    transform: translateY(-61%);
+  }
+  
+  #chk:checked ~ .register label {
+    transform: scale(1);
+    margin: 10% 0 5%;
+  }
+  
+  #chk:checked ~ .login label {
+    transform: scale(.6);
+    margin: 5% 0 5%;
+  }
+  
+  .form button {
+    width: 85%;
+    height: 40px;
+    margin: 12px auto 10%;
+    color: #fff;
+    background: #11529D;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in;
+  }
+  
+  .form button:hover {
+    background-color: #0B2D55;
+  }
+  .conteiner .text{
+    position: relative;
+    color: #A3CCFF;
+    font-size: 35px;
+    font-weight: 500; 
+  }
+  
+  .conteiner .text.first-text{
+    color: white; 
+  }
+   
+  .text.second-text:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-left: 2px solid white;
+    animation: animate 4s steps(12) infinite;
+    background-color: #1976D2;
+  }
+  
+  
+  @keyframes animate{
+    40%, 60%{
+        left: 100%;
+    }
+    100%{
+        left: 0%;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+  
+    .box-1 {
+      display: none;
+    }
+  
+  
+    .box-2 {
+      flex: 1;
+    }
+  
+    .heroki {
+      width: 100%;
+    }
+    body{
+      background-color: white;
+    }
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .conteiner .text{
+        font-size: 45px;
+        font-weight: 600;
+    }
+    .title{
+      font-size: 3rem;
+      margin-top: 250px;
+    }
+    .hero{
+      margin-top: 40px;
+    } 
+  }
+  
+  @media screen and (min-width: 1200px) {
+  
+    .conteiner .text{
+        font-size: 35px;
+        font-weight: 600;
+    }
+    .title{
+      font-size: 3rem;
+      margin-top: 300px;
+    }
+    .hero{
+      margin-top: 40px;
+    } 
+  
+  }
+  
+  @media screen and (min-width: 1280px) {
+  
+    .conteiner .text{
+        font-size: 35px;
+        font-weight: 600;
+    }
+    .title{
+      font-size: 3rem;
+      margin-top: 300px;
+    }
+    .hero{
+      margin-top: 90px;
+    } 
+  
+  }
+  
+  @media screen and (min-width: 1370px) {
+  
+    .conteiner .text{
+        font-size: 45px;
+        font-weight: 600;
+    }
+    .title{
+      font-size: 4rem;
+      margin-top: 400px;
+    }
+     
+    .hero{
+      margin-top: 200px;
+    } 
+  }
+  
