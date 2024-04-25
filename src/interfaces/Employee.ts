@@ -26,4 +26,4 @@ enum StatusEmployee {
 }
 
 //Crear un type FormEmployee similar a employee sin el id y el campo role debe ser string
-export type FormEmployee = Omit<Employee, 'id' | 'role' | 'lastAccess'> & { role: string };
+export type FormEmployee = Omit<Employee, 'id' | 'role' | 'lastAccess'> & { roleId: number };

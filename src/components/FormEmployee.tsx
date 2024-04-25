@@ -40,7 +40,8 @@ const FormEmployeeSave = ({
     if (isEdit && employee) {
       setValue('name', employee.name);
       setValue('email', employee.email);
-      setValue('role', employee.role.id as unknown as string);
+      setValue('password', employee.password);
+      setValue('roleId', employee.role.id);
       setValue('hiringDate', employee.hiringDate);
       setValue('state', employee.state);
     }
@@ -48,6 +49,7 @@ const FormEmployeeSave = ({
 
   const onSubmit: SubmitHandler<FormEmployee> = async (data) => {
     try {
+      data.roleId = Number(data.roleId);
       if (isEdit && employee) {
         // Edit employee
         const response = await updateEmployee(Number(employee.id), data);
@@ -126,8 +128,16 @@ const FormEmployeeSave = ({
             },
           }}
         />
+        <InputText
+          type="password"
+          name="password"
+          control={control}
+          label="Contraseña"
+          required
+          errors={errors}
+        />
         <InputSelect
-          name="role"
+          name="roleId"
           control={control}
           label="Rol"
           required
