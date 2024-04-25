@@ -40,6 +40,7 @@ function Loginn() {
                 <input className="input" type="password" name="pswd" placeholder="Password" required />
                 <button>Log in</button>
                 </form>
+                
             </div>
 
             <div className="register">
