@@ -66,53 +66,57 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="heroki">
-      <div className="box-1">
-        <div className="conteiner">
-          <h1 className="title">Action Factory</h1>
-          <h3 className="text second-text" ref={secondTextRef}>
-            Validación de dispositivos
-          </h3>
+    <div className="login__container">
+      <div className="heroki">
+        <div className="box-1">
+          <div className="conteiner">
+            <h1 className="title">Action Factory</h1>
+            <h3 className="text second-text" ref={secondTextRef}>
+              Validación de dispositivos
+            </h3>
+          </div>
         </div>
-      </div>
-      <div className="box-2">
-        <div className="hero">
-          <div className="main">
-            <input type="checkbox" id="chk" aria-hidden="true" />
-            <div className="login">
-              <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                {errorLogin && (
-                  <Alert severity="error" className='form__alert'>
-                    Usuario o contraseña incorrectos.
-                  </Alert>
-                )}
-                <label htmlFor="chk" aria-hidden="true">
-                  Ingresar
-                </label>
-                <input
-                  className={`input ${errors.email ? 'border__error' : ''}`}
-                  type="email"
-                  placeholder="Correo electrónico"
-                  {...register('email', { required: true })}
-                />
-                {errors.email && (
-                  <span className="input__error">
-                    Este campo es obligatorio
-                  </span>
-                )}
-                <input
-                  className={`input ${errors.password ? 'border__error' : ''}`}
-                  type="password"
-                  placeholder="Contraseña"
-                  {...register('password', { required: true })}
-                />
-                {errors.password && (
-                  <span className="input__error">
-                    Este campo es obligatorio
-                  </span>
-                )}
-                <button>Log in</button>
-              </form>
+        <div className="box-2">
+          <div className="hero">
+            <div className="main">
+              <input type="checkbox" id="chk" aria-hidden="true" />
+              <div className="login">
+                <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                  {errorLogin && (
+                    <Alert severity="error" className="form__alert">
+                      Usuario o contraseña incorrectos.
+                    </Alert>
+                  )}
+                  <label htmlFor="chk" aria-hidden="true">
+                    Ingresar
+                  </label>
+                  <input
+                    className={`input ${errors.email ? 'border__error' : ''}`}
+                    type="email"
+                    placeholder="Correo electrónico"
+                    {...register('email', { required: true })}
+                  />
+                  {errors.email && (
+                    <span className="input__error">
+                      Este campo es obligatorio
+                    </span>
+                  )}
+                  <input
+                    className={`input ${
+                      errors.password ? 'border__error' : ''
+                    }`}
+                    type="password"
+                    placeholder="Contraseña"
+                    {...register('password', { required: true })}
+                  />
+                  {errors.password && (
+                    <span className="input__error">
+                      Este campo es obligatorio
+                    </span>
+                  )}
+                  <button>Log in</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
