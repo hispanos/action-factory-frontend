@@ -8,6 +8,7 @@ import { User } from '../interfaces/User';
 import Dashboard from '../templates/Dashboard';
 import { AlertType } from '../interfaces/Alert';
 import Employees from '../pages/Employees';
+import Devices from '../pages/Devices';
 
 export type UserContextType = {
   user: User | undefined;
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
           { path: '/', element: <Home /> },
           { path: '/suppliers', element: <Suppliers /> },
           { path: '/employees', element: <Employees /> },
+          { path: '/devices', element: <Devices /> },
         ],
       },
     ],
