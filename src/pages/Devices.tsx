@@ -183,7 +183,7 @@ const Devices = () => {
                 <Button
                   variant="contained"
                   onClick={handleSearch}
-                  disabled={optionSearch === '' || textSearch === ''}
+                  disabled={(optionSearch === '' || textSearch === '') && !(optionSearch === 'all')}
                 >
                   Buscar
                 </Button>
