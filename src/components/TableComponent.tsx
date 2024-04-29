@@ -122,7 +122,7 @@ const TableComponent = <T extends RowType>({
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={(event, newPage) => {
+        onPageChange={(_event, newPage) => {
           setPage(newPage);
         }}
         onRowsPerPageChange={(event) => {
