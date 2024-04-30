@@ -1,6 +1,8 @@
 import {
+  Backdrop,
   Box,
   Button,
+  CircularProgress,
   FormControl,
   Grid,
   IconButton,
@@ -70,14 +72,19 @@ const Devices = () => {
   const [textSearch, setTextSearch] = useState<string>('');
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [currentDevice, setCurrentDevice] = useState<Device>();
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getData = async () => {
+    setLoading(true);
     try {
       const response = await getAllDevices();
       updateListDevices(response.data);
+      setLoading(false);
     } catch (error) {
       setDevicesList([]);
       setDevices([]);
+      setLoading(false);
     }
   };
 
@@ -133,9 +140,13 @@ const Devices = () => {
     }
   };
 
+  const doRefresh = () => {
+    setRefresh(!refresh);
+  };
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
@@ -145,9 +156,20 @@ const Devices = () => {
           setOpenModal={setOpenModal}
           size="small"
         >
-          <UpdateState setOpenModal={setOpenModal} device={currentDevice} />
+          <UpdateState
+            setOpenModal={setOpenModal}
+            device={currentDevice}
+            doRefresh={doRefresh}
+            setLoading={setLoading}
+          />
         </ModalComponent>
       )}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper sx={{ p: 2 }}>
@@ -183,7 +205,10 @@ const Devices = () => {
                 <Button
                   variant="contained"
                   onClick={handleSearch}
-                  disabled={(optionSearch === '' || textSearch === '') && !(optionSearch === 'all')}
+                  disabled={
+                    (optionSearch === '' || textSearch === '') &&
+                    !(optionSearch === 'all')
+                  }
                 >
                   Buscar
                 </Button>

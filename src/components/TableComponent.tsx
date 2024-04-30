@@ -99,20 +99,6 @@ const TableComponent = <T extends RowType>({
                 })}
               </TableRow>
             ))}
-          {/* {rows
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => (
-              <TableRow key={index}>
-                {columns.map((column, index2) => {
-                  if (column.format) {
-                    return (
-                      <TableCell key={index2}>{column.format(row)}</TableCell>
-                    );
-                  }
-                  return <TableCell key={index2}>{row[column.name]}</TableCell>;
-                })}
-              </TableRow>
-            ))} */}
         </TableBody>
       </Table>
       <TablePagination
