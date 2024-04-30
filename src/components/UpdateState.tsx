@@ -7,24 +7,51 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Device } from '../interfaces/Device';
+import { updateStateDevice } from '../services/device';
+import { AppContext } from '../routes/Routes';
 
 const UpdateState = ({
   setOpenModal,
-  device
+  device,
+  doRefresh,
+  setLoading,
 }: {
   setOpenModal: (value: boolean) => void;
   device: Device | undefined;
+  doRefresh: () => void;
+  setLoading: (value: boolean) => void;
 }) => {
   const [optionState, setOptionState] = useState('');
+  const { setAlert } = useContext(AppContext);
 
   const updateState = async () => {
     if (device) {
       // update device state
+      setLoading(true);
+      const response = await updateStateDevice(
+        device.imei.toString(),
+        optionState
+      );
+      if (response?.data) {
+        setAlert({
+          open: true,
+          message: 'Estado actualizado con éxito.',
+          type: 'success',
+        });
+        doRefresh();
+      } else {
+        setAlert({
+          open: true,
+          message: 'Hubo un problema al actualizar el estado.',
+          type: 'error',
+        });
+      }
+      setLoading(true);
       setOpenModal(false);
     }
-  }
+  };
 
   return (
     <>
@@ -53,11 +80,7 @@ const UpdateState = ({
             <MenuItem value={'CANCELADO'}>CANCELADO</MenuItem>
           </Select>
         </FormControl>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={updateState}
-        >
+        <Button variant="contained" color="primary" onClick={updateState}>
           Aceptar
         </Button>
       </Box>

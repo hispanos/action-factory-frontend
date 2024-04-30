@@ -18,3 +18,8 @@ export const getDevicesBySupplier = async (supplier: string) => {
     const response = await axios.get<ResponseApi<Device[]>>(`${API_URL}/device/supplier/${supplier}`);
     return response.data;
 }
+
+export const updateStateDevice = async (imei: string, state: string) => {
+    const response = await axios.patch<ResponseApi<Device>>(`${API_URL}/device/imei/${imei}/state/${state}`);
+    return response.data;
+}
